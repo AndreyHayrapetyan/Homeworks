@@ -1,3 +1,4 @@
+//EntryConditions
 import java.util.Scanner;
 
 public class EntryConditions {

@@ -1,3 +1,4 @@
+//ShortAverage
 import java.util.Scanner;
 
 public class ShortAverage {
