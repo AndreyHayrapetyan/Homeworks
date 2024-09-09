@@ -1,3 +1,4 @@
+//EntryConditions
 import java.util.Scanner;
 
 public class EntryConditions {
@@ -9,29 +10,24 @@ public class EntryConditions {
 
         if (age < 16) {
             System.out.println("People's entry under 16 is prohibited");
+            System.exit(1);
         } else {
             System.out.println("Welcome");
 
-            System.out.println("Order price ");
-            double order = scanner.nextDouble();
-            order = 5000 + order;
-
             System.out.println("Are you VIP true/false ");
-            boolean vip = scanner.hasNextBoolean();
+            boolean vip = scanner.nextBoolean();
 
-            if (vip == true) {
-                order *= 0.85;
-                System.out.println("Your bill is "  + order);
+            if (vip) {
+                System.out.println("Enter your order price");
+                double vipprice = scanner.nextDouble();
+                vipprice *= 0.85;
+                System.out.println("Your price is " + vipprice);
             } else {
-                System.out.println("No discount");
+                System.out.println("Enter your order price");
+                double price = scanner.nextDouble();
+                price = 5000 + price;
+                System.out.println("Your price is " + price);
             }
-
-
-
-
-
         }
-
-
     }
 }
