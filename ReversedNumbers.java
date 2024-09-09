@@ -1,3 +1,4 @@
+//ReversedNumbers
 import java.util.Scanner;
 
 public class ReversedNumbers {
@@ -11,12 +12,13 @@ public class ReversedNumbers {
         int digit2 =((a % 100) / 10);
         int digit3 = (a / 100);
 
+        int reversednumber = (digit1 * 100) + (digit2 * 10) + digit3;
+
         if (a < 0 || digit1 == 0) {
             System.out.println("Invalid number");
             System.exit(0);
         } else {
-            System.out.println("Reversed number is " + digit1 + digit2 + digit3);
+            System.out.println("Reversed number is " + reversednumber);
         }
-
     }
 }
