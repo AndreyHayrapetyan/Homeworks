@@ -1,3 +1,4 @@
+//ShortAverage
 import java.util.Scanner;
 
 public class ShortAverage {
@@ -21,9 +22,12 @@ public class ShortAverage {
         num2 = b < 0 ? -b : b;
         num3 = c < 0 ? -c : c;
 
+        if (sum == 0) {
+            System.out.println("The sum cannot be divided into 0 ");
+            System.exit(1);
+        }
+
         int absolutesum = (num1 + num2 + num3) / sum;
         System.out.println("Average sum is "  + absolutesum );
-
-
     }
 }
