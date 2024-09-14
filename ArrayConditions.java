@@ -30,22 +30,7 @@ public class ArrayConditions {
         int[] b = new int[a];
         b[0] = 15 * (a / 15);
 
-        switch (a) {
-            case 3:
-                System.out.println(Arrays.toString(b));
-                break;
-            case 4:
-                System.out.println(Arrays.toString(b));
-                break;
-            case 5:
-                System.out.println(Arrays.toString(b));
-                break;
-            case 6 , 7:
-                System.out.println(Arrays.toString(b));
-                break;
-            default:
-                System.out.println(Arrays.toString(b));
-                break;
-        }
+
+        System.out.println(Arrays.toString(b));
     }
 }

@@ -19,8 +19,8 @@ public class MidNumber {
         int[] array = new int[n];
 
         int mid = n / 2;
-        array[mid - 1] = a;
-        array[mid + 1] = b;
+        array[mid - 1] = a < b ? a : b;
+        array[mid + 1] = a < b ? b : a;
 
 
 
