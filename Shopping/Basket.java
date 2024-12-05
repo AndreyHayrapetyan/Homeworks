@@ -2,7 +2,7 @@ package Shopping;
 
 import java.util.Arrays;
 
-public abstract class Basket {
+public class Basket {
     private Item[] basket;
     private Item[] gifts;
 
@@ -14,16 +14,13 @@ public abstract class Basket {
     public void addItemToBasket(Item item) {
         for (Item basketItem : basket) {
             if (basketItem == item) {
-                System.out.println("Item already exists in basket");
-                return;
+                throw new DuplicateItemException("Item already exists in the basket: " + item.getBrand());
             }
         }
-        Item[] newList = new Item[basket.length + 1];
-        for (int i = 0; i < basket.length; i++) {
-            newList[i] = basket[i];
-        }
+        Item[] newList = Arrays.copyOf(basket, basket.length + 1);
         newList[newList.length - 1] = item;
         basket = newList;
+
         Item gift;
         if (item instanceof TV || item instanceof Notebook) {
             gift = item instanceof TV ? new SmartPhone(85000) : new HairDryer(28000);
@@ -41,51 +38,52 @@ public abstract class Basket {
 
     public String[] getGifts() {
         String[] giftsList = new String[gifts.length];
-        for (int i = 0; i < giftsList.length; i++) {
-            giftsList[i] = "[Item:" + gifts[i].getBrand() + ",ID:" + gifts[i].getId() + ",Price:" + gifts[i].getPrice() + "]";
+        for (int i = 0; i < gifts.length; i++) {
+            giftsList[i] = "[Item:" + gifts[i].getBrand() + ", ID:" + gifts[i].getId() + ", Price:" + gifts[i].getPrice() + "]";
         }
         return giftsList;
     }
 
     public boolean checkGiftsInList() {
-        int nullCounter = 0;
-        String[] gifts = getGifts();
-        for (String gift : gifts) {
-            if (gift == null) {
-                nullCounter++;
-            }
-        }
-        return nullCounter == gifts.length - 1;
+        return gifts.length > 1;
     }
 
     public void addGiftToGiftList(Item gift, int id) {
-        Item[] newList = new Item[gifts.length + 1];
-        for (int i = 0; i < gifts.length; i++) {
-            newList[i] = gifts[i];
+        if (gifts.length >= 1) {
+            throw new GiftLimitExceededException("Customer can have only one gift.");
         }
+        Item[] newList = Arrays.copyOf(gifts, gifts.length + 1);
         gift.setId(id);
         newList[newList.length - 1] = gift;
         gifts = newList;
     }
 
     public void deleteGiftFromGiftList(int id) {
-        int index = 0;
+        boolean found = false;
         Item[] newList = new Item[gifts.length - 1];
+        int index = 0;
+
         for (Item gift : gifts) {
             if (gift.getId() != id) {
                 if (index < newList.length) {
                     newList[index++] = gift;
                 }
+            } else {
+                found = true;
             }
         }
+
+        if (!found) {
+            throw new IllegalArgumentException("Gift with ID " + id + " not found.");
+        }
+
         gifts = newList;
     }
 
-
     public String getBasket() {
         String[] itemsList = new String[basket.length];
-        for (int i = 0; i < itemsList.length; i++) {
-            itemsList[i] = "[Item:" + basket[i].getBrand() + ",ID:" + basket[i].getId() + ",Price:" + basket[i].getPrice() + "]";
+        for (int i = 0; i < basket.length; i++) {
+            itemsList[i] = "[Item:" + basket[i].getBrand() + ", ID:" + basket[i].getId() + ", Price:" + basket[i].getPrice() + "]";
         }
         return Arrays.toString(itemsList);
     }

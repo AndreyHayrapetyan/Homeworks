@@ -1,14 +1,12 @@
 package Shopping;
 
-import java.util.Arrays;
-
 public abstract class Item {
     private int id;
-    private String brand;
+    private ItemBrand brand;
     private double price;
-    private int idCounter = 1;
+    private static int idCounter = 1;
 
-    public Item(String brand, double price) {
+    public Item(ItemBrand brand, double price) {
         this.id = idCounter++;
         this.brand = brand;
         this.price = price;
@@ -22,12 +20,11 @@ public abstract class Item {
         this.id = id;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return price;
     }
 
-    public String getBrand() {
+    public ItemBrand getBrand() {
         return brand;
     }
 }
-

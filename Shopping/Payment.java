@@ -3,9 +3,9 @@ package Shopping;
 public class Payment extends Basket {
     private String name;
     private int balance;
-    private String cardType;
+    private CardType cardType;
 
-    public Payment(String name, int balance, String cardType) {
+    public Payment(String name, int balance, CardType cardType) {
         super();
         this.name = name;
         this.balance = balance;
@@ -20,7 +20,7 @@ public class Payment extends Basket {
         return balance;
     }
 
-    public String getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 
