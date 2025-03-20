@@ -70,15 +70,3 @@ public class Testing {
     }
 }
 
-/* WebDriver driver = new ChromeDriver();
-driver.get("https://amazon.com");
-driver.manage().window().maximize();
-By inputFieldLocator = By.id("twotabsearchtextbox");
-
-Thread.sleep(3000);
-
-WebElement searchField = driver.findElement(inputFieldLocator);
-searchField.sendKeys("jeans");
-
-By searchButton = By.id("nav-search-submit-button");
-driver.findElement(searchButton).click(); */
