@@ -1,38 +1,27 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public enum SingleTon {
     INSTANCE;
+    private static WebDriver driver;
 
-    private final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    private SingleTon() {}
 
-    public WebDriver getDriver() {
-        if (driverThreadLocal.get() == null) {
-            String browser = System.getProperty("browser");
-            if (browser == null) {
-                throw new IllegalStateException("System property 'browser' is not set");
-            }
-
-            switch (browser.toLowerCase()) {
-                case "chrome":
-                    driverThreadLocal.set(new ChromeDriver());
-                    break;
-                case "edge":
-                    driverThreadLocal.set(new EdgeDriver());
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unsupported browser: " + browser);
-            }
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
         }
-        return driverThreadLocal.get();
+        return driver;
     }
 
-    public void quitDriver() {
-        WebDriver driver = driverThreadLocal.get();
+    public static void quitDriver() {
         if (driver != null) {
             driver.quit();
-            driverThreadLocal.remove();
+            driver = null;
         }
     }
 }
