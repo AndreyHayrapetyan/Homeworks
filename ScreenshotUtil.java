@@ -27,12 +27,17 @@ public class ScreenshotUtil {
         }
     }
 
-    public static void addScreenshot(WebDriver driver, String e, String name, String screenshotName) throws IOException {
-        String fileName = "Screenshot_on_failure_" + e.getClass().getSimpleName() + "_" + sanitizeFileName(name) + ".png";
+    public static void addScreenshot(WebDriver driver, String errorType, String testName, String screenshotName) throws IOException {
+        String fileName = "Screenshot_on_failure_" + sanitizeFileName(errorType) + "_" + sanitizeFileName(testName) + ".png";
         Path screenshotsDir = Path.of("screenshots");
         Files.createDirectories(screenshotsDir); // create screenshots/ if it doesn't exist
         Path path = screenshotsDir.resolve(fileName); // full path: screenshots/yourfile.png
         ScreenshotUtil.savePageScreenshot(driver, path);
         Allure.addAttachment(screenshotName, "image/png", Files.newInputStream(path), ".png");
     }
+
+    public static void addScreenshot(WebDriver driver, Exception e, String name, String screenshotName) throws IOException {
+        addScreenshot(driver, e.getClass().getSimpleName(), name, screenshotName);
+    }
+
 }

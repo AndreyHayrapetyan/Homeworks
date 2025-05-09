@@ -57,7 +57,8 @@ public class JobPage {
     public void clearAllFilters() {
         clickOn(clearFiltersButton);
         logger.info("Clicked on 'Clear filters' button");
-        waitUntilPageIsStable();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),'Clear filters')]")));
+
     }
 
     @Step("Scroll to given element")
@@ -85,7 +86,7 @@ public class JobPage {
     }
 
     @Step("Get total count of companies")
-    public int[] getTotalCountOfCompanies(String name) {
+    public List<Integer> getTotalCountOfCompanies(String name) {
         String actualName = name.replaceAll("\\s*\\(.*\\)", "");
         String actualNumber = name.replaceAll(".*\\((\\d+)\\).*", "$1");
         int actualNumberIntValue = Integer.parseInt(actualNumber);
@@ -95,51 +96,53 @@ public class JobPage {
         logger.info("Found filter element for '{}'", actualName);
         clickOn(el);
         logger.info("Clicked on filter: {}", actualName);
-        waitUntilPageIsStable();
+
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//img[@alt='brifecase']/parent::div/following-sibling::div/div/div[a[@href]]")));
 
         int count = 0;
         if (actualNumberIntValue > 50) {
             scrollToElement(navigationButtons.get(0));
             WebElement lastPageButton = navigationButtons.get(navigationButtons.size() - 2);
             wait.until(ExpectedConditions.elementToBeClickable(lastPageButton)).click();
-            waitUntilPageIsStable();
+
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                    By.xpath("//img[@alt='brifecase']/parent::div/following-sibling::div/div/div[a[@href]]")));
 
             int pageCount = Integer.parseInt(navigationButtons.get(navigationButtons.size() - 3).getText());
             logger.info("Total pages: {}", pageCount);
             count = pageCount * 50;
         }
-        waitUntilPageIsStable();
+
         count += getCompaniesCountOnPage();
         logger.info("Expected count: {}, Actual counted companies: {}", actualNumberIntValue, count);
-        return new int[]{Integer.parseInt(actualNumber), count};
+        return List.of(Integer.parseInt(actualNumber), count);
     }
 
+
     @Step("Validate if given count in staff.am and actual count of companies is the same")
-    public boolean validateCount(String name) {
-        int[] a = getTotalCountOfCompanies(name);
-        boolean isEqual = a[0] == a[1];
+    public boolean combinedFilterCount(String name) {
+        List<Integer> result = getTotalCountOfCompanies(name);
+        boolean isEqual = result.get(0).equals(result.get(1));
         logger.info("Validation result for '{}': {}", name, isEqual ? "MATCH" : "MISMATCH");
         return isEqual;
     }
 
+
     @Step("Validate if combined filters count matches filtered company count")
-    public boolean validateCount(String name1, String name2) throws IOException {
-        int[] a = getTotalCountOfCompanies(name1);
-        int[] b = getTotalCountOfCompanies(name2);
-        int combined = a[0] + b[0];
-        int filteredCompaniesCount = b[1];
+    public boolean combinedFilterCount(String name1, String name2) throws IOException {
+        List<Integer> first = getTotalCountOfCompanies(name1);
+        List<Integer> second = getTotalCountOfCompanies(name2);
+        int combinedExpected = first.get(0) + second.get(0);
+        int actualFiltered = second.get(1);
 
-        logger.info("Combined expected count: {}, Actual filtered: {}", combined, filteredCompaniesCount);
+        logger.info("Combined expected count: {}, Actual filtered: {}", combinedExpected, actualFiltered);
         clearAllFilters();
-        waitUntilPageIsStable();
-        return combined == filteredCompaniesCount;
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[contains(text(),'Clear filters')]")));
+
+        return combinedExpected == actualFiltered;
     }
 
-    private void waitUntilPageIsStable() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
 }
