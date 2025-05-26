@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
-
+@Tag("UI")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCase1 {
 
