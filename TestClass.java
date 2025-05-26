@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.*;
-
+@Tag("UI")
 @ExtendWith(ScreenshotOnFailureExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestClass {
