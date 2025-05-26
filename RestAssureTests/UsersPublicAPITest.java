@@ -12,7 +12,7 @@ import java.util.Random;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
+@Tag("API")
 public class UsersPublicAPITest {
 
     private final String token = "Bearer b4e645fd844b66a9936e885b67e599859d37355d6b42ff826b3aa36aa92092fe";
