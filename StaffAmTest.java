@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import staffPages.CompanyPage;
 import staffPages.MainPage;
 import staffPages.SearchPage;
-
+@Tag("UI")
 public class StaffAmTest {
     private WebDriver driver;
     private MainPage mainPage;
