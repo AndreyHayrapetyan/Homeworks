@@ -9,7 +9,7 @@ import java.util.*;
 
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
-
+@Tag("API")
 public class CreatePostTest {
 
     private static final String TOKEN = "Bearer b4e645fd844b66a9936e885b67e599859d37355d6b42ff826b3aa36aa92092fe";
