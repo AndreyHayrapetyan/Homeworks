@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class StaffAmRegisterPage extends BaseActions {
-    private static final Logger logger = LoggerFactory.getLogger(StaffAMRegisterPage.class);
+    private static final Logger logger = LoggerFactory.getLogger(StaffAmRegisterPage.class);
 
     public StaffAmRegisterPage() {
     }

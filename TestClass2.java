@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-
+@Tag("UI")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestClass2 {
     static {

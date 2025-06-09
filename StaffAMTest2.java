@@ -11,7 +11,7 @@ import staffAMPages.DefaultPage;
 
 
 import java.util.List;
-
+@Tag("UI")
 public class StaffAMTest2 {
     private WebDriver driver;
 

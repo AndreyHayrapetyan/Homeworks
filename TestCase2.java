@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.Random;
-
+@Tag("UI")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestCase2 {
 
