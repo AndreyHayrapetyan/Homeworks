@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 import java.util.*;
-@Tag("UI")
+
 @ExtendWith(ScreenshotOnFailureExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TestClass {
@@ -26,6 +26,7 @@ public class TestClass {
     }
 
     @ParameterizedTest
+    @Tag("UI")
     @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6})
     public void testFilterValidationWithRandomSelection(int filterIndex) throws Exception {
         String[] filterItems = jobPage.filtersWebElementList.get(filterIndex).getText().split("\n");
