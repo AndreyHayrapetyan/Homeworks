@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import staffPages.CompanyPage;
 import staffPages.MainPage;
 import staffPages.SearchPage;
-@Tag("UI")
+
 public class StaffAmTest {
     private WebDriver driver;
     private MainPage mainPage;
@@ -25,6 +25,7 @@ public class StaffAmTest {
     }
 
     @Test
+    @Tag("UI")
     void test_1() throws InterruptedException {
         mainPage = new MainPage(driver);
         searchPage = new SearchPage(driver);
