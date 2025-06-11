@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
-@Tag("UI")
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCase1 {
 
@@ -23,6 +23,7 @@ public class TestCase1 {
     }
 
     @Test
+    @Tag("UI")
     @Tag("TestCase1")
     public void applyFilterAndValidateCount() throws InterruptedException {
         navigateToCategory(tabName, subTab, optionName);
@@ -30,6 +31,7 @@ public class TestCase1 {
         validateProductCountMatchesFilter();
     }
     @Test
+    @Tag("UI")
     @Tag("TestCase1")
     public void removeFilterAndValidate() throws InterruptedException {
         removeFilter(colorName);
