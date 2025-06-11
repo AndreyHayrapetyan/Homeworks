@@ -11,7 +11,7 @@ import staffAMPages.DefaultPage;
 
 
 import java.util.List;
-@Tag("UI")
+
 public class StaffAMTest2 {
     private WebDriver driver;
 
@@ -28,6 +28,7 @@ public class StaffAMTest2 {
     }
 
     @Test
+    @Tag("UI")
     public void test() throws InterruptedException {
 
         MainPage mainPage = new MainPage();
